@@ -21,16 +21,31 @@ def play_tic_tac_toe():
 
     while game_on:
 
-        print("\n")
-        print("   | 1 | 2 | 3 ")
-        print("---|-----------")
-        print(f' A | {answer_list["a1"]} | {answer_list["a2"]} | {answer_list["a3"]}')
-        print("---|-----------")
-        print(f' B | {answer_list["b1"]} | {answer_list["b2"]} | {answer_list["b3"]}')
-        print("---|-----------")
-        print(f' C | {answer_list["c1"]} | {answer_list["c2"]} | {answer_list["c3"]}')
-        print("\n======================================================================")
-        print("\n\n")
+        game_board = (
+            "\n"
+            "\n   | 1 | 2 | 3 "
+            "\n---|-----------"
+            f'\n A | {answer_list["a1"]} | {answer_list["a2"]} | {answer_list["a3"]}'
+            "\n---|-----------"
+            f'\n B | {answer_list["b1"]} | {answer_list["b2"]} | {answer_list["b3"]}'
+            "\n---|-----------"
+            f'\n C | {answer_list["c1"]} | {answer_list["c2"]} | {answer_list["c3"]}'
+            "\n\n======================================================================"
+            "\n\n"
+        )
+
+        print(game_board)
+
+        # print("\n")
+        # print("   | 1 | 2 | 3 ")
+        # print("---|-----------")
+        # print(f' A | {answer_list["a1"]} | {answer_list["a2"]} | {answer_list["a3"]}')
+        # print("---|-----------")
+        # print(f' B | {answer_list["b1"]} | {answer_list["b2"]} | {answer_list["b3"]}')
+        # print("---|-----------")
+        # print(f' C | {answer_list["c1"]} | {answer_list["c2"]} | {answer_list["c3"]}')
+        # print("\n======================================================================")
+        # print("\n\n")
 
 
         if turns % 2 == 0:
@@ -45,6 +60,7 @@ def play_tic_tac_toe():
             print("\n!!!!! Please enter a valid coordinate (example: B2). !!!!!")
         elif answer_list[player_answer] == " ":
             answer_list[player_answer] = player_symbol
+            # print(game_board)
             turns += 1
         else:
             print("\n!!!!! That coordinate is taken. Please choose another coordinate. !!!!!")
