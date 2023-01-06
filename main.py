@@ -13,59 +13,52 @@ answer_list = {
 }
 
 
+def play_area():
+    game_board = (
+        "\n"
+        "\n   | 1 | 2 | 3 "
+        "\n---|-----------"
+        f'\n A | {answer_list["a1"]} | {answer_list["a2"]} | {answer_list["a3"]}'
+        "\n---|-----------"
+        f'\n B | {answer_list["b1"]} | {answer_list["b2"]} | {answer_list["b3"]}'
+        "\n---|-----------"
+        f'\n C | {answer_list["c1"]} | {answer_list["c2"]} | {answer_list["c3"]}'
+        "\n\n======================================================================"
+        "\n\n"
+    )
+
+    return game_board
+
+
 def play_tic_tac_toe():
     print("\n=== Welcome to Tic Tac Toe! ===")
 
     game_on = True
     turns = 0
+    print(play_area())
 
     while game_on:
 
-        game_board = (
-            "\n"
-            "\n   | 1 | 2 | 3 "
-            "\n---|-----------"
-            f'\n A | {answer_list["a1"]} | {answer_list["a2"]} | {answer_list["a3"]}'
-            "\n---|-----------"
-            f'\n B | {answer_list["b1"]} | {answer_list["b2"]} | {answer_list["b3"]}'
-            "\n---|-----------"
-            f'\n C | {answer_list["c1"]} | {answer_list["c2"]} | {answer_list["c3"]}'
-            "\n\n======================================================================"
-            "\n\n"
-        )
-
-        print(game_board)
-
-        # print("\n")
-        # print("   | 1 | 2 | 3 ")
-        # print("---|-----------")
-        # print(f' A | {answer_list["a1"]} | {answer_list["a2"]} | {answer_list["a3"]}')
-        # print("---|-----------")
-        # print(f' B | {answer_list["b1"]} | {answer_list["b2"]} | {answer_list["b3"]}')
-        # print("---|-----------")
-        # print(f' C | {answer_list["c1"]} | {answer_list["c2"]} | {answer_list["c3"]}')
-        # print("\n======================================================================")
-        # print("\n\n")
-
-
+        # Determine which player's turn it is
         if turns % 2 == 0:
             player_symbol = "X"
         else:
             player_symbol = "O"
 
-
+        # Prompt player for coordinate
         player_answer = input(f"Turn {turns + 1}: Player {player_symbol}, enter a coordinate (example: B2) to place your '{player_symbol}': ").lower()
 
+        # Check if coordinate exists and is available
         if player_answer not in answer_list:
-            print("\n!!!!! Please enter a valid coordinate (example: B2). !!!!!")
+            print("\n[[[ Please enter a valid coordinate (A1 to C3). ]]]\n")
         elif answer_list[player_answer] == " ":
             answer_list[player_answer] = player_symbol
-            # print(game_board)
+            print(play_area())
             turns += 1
+            game_on = check_winner(turns)
         else:
-            print("\n!!!!! That coordinate is taken. Please choose another coordinate. !!!!!")
-
-        game_on = check_winner(turns)
+            print(f"\n[[[ {player_answer.upper()} is taken. Please choose another coordinate. ]]]\n")
+        
 
     play_game()
 
@@ -82,21 +75,24 @@ def check_winner(turns):
         [answer_list["a3"], answer_list["b2"], answer_list["c1"]],
     ]
 
-    if turns > 9:
-        print("It's a DRAW!")
-        return False
+    print(winners)
 
     for trio in winners:
         if all(i == 'X' for i in trio):
             print('\n\n!!!!! Player X is the winner !!!!!\n\n')
+            print(i)
             return False
-        if all(i == 'O' for i in trio):
+        elif all(i == 'O' for i in trio):
             print('\n\n!!!!! Player O is the winner !!!!!\n\n')
             return False
-    print("No winner yet. Keep playing!")
-    return True
+        elif turns > 8:
+            print("!!!!! It's a DRAW !!!!!")
+            return False
+        else:
+            print("\nNo winner yet. Keep playing!\n")
+            return True
 
-
+    
 # def winners_board():
 #     if winners[trio] == 0 or winners[trio] == 1 or winners[trio] == 2:
 #         for i in trio:
