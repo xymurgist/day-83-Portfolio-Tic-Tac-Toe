@@ -13,8 +13,20 @@ answer_list = {
 }
 
 
-def play_area():
-    game_board = (
+def play_game():
+    """Prompt user to play Tic Tac Toe"""
+    play_again = input("\nWould you like to play Tic Tac Toe? (y/n): ")
+    if play_again == 'y':
+        for x in answer_list:
+            answer_list[x] = " "
+        tic_tac_toe()
+    else:
+        pass
+
+
+def game_board():
+    """Create the Game Board"""
+    the_board = (
         "\n"
         "\n   | 1 | 2 | 3 "
         "\n---|-----------"
@@ -27,15 +39,16 @@ def play_area():
         "\n\n"
     )
 
-    return game_board
+    return the_board
 
 
-def play_tic_tac_toe():
+def tic_tac_toe():
+    """Logic to determine if a player-entered coordinate exists and is available."""
     print("\n=== Welcome to Tic Tac Toe! ===")
 
     game_on = True
     turns = 0
-    print(play_area())
+    print(game_board())
 
     while game_on:
 
@@ -53,7 +66,7 @@ def play_tic_tac_toe():
             print("\n[[[ Please enter a valid coordinate (A1 to C3). ]]]\n")
         elif answer_list[player_answer] == " ":
             answer_list[player_answer] = player_symbol
-            print(play_area())
+            print(game_board())
             turns += 1
             game_on = check_winner(turns)
         else:
@@ -64,6 +77,7 @@ def play_tic_tac_toe():
 
 
 def check_winner(turns):
+    """Checks the latest coordinate entered against previous entries to determine if there is a winner"""
     winners = [
         [answer_list["a1"], answer_list["a2"], answer_list["a3"]],
         [answer_list["b1"], answer_list["b2"], answer_list["b3"]],
@@ -75,47 +89,18 @@ def check_winner(turns):
         [answer_list["a3"], answer_list["b2"], answer_list["c1"]],
     ]
 
-    print(winners)
-
     for trio in winners:
         if all(i == 'X' for i in trio):
             print('\n\n!!!!! Player X is the winner !!!!!\n\n')
-            print(i)
             return False
-        elif all(i == 'O' for i in trio):
+        if all(i == 'O' for i in trio):
             print('\n\n!!!!! Player O is the winner !!!!!\n\n')
             return False
         elif turns > 8:
             print("!!!!! It's a DRAW !!!!!")
             return False
-        else:
-            print("\nNo winner yet. Keep playing!\n")
-            return True
-
-    
-# def winners_board():
-#     if winners[trio] == 0 or winners[trio] == 1 or winners[trio] == 2:
-#         for i in trio:
-#             answer_list[i] = '|'
-#     elif winners[trio] == 3 or winners[trio] == 4 or winners[trio] == 5:
-#         for i in trio:
-#             answer_list[i] = '-'
-#     elif winners[trio] == 6:
-#         for i in trio:
-#             answer_list[i] = '\\'
-#     elif winners[trio] == 7:
-#         for i in trio:
-#             answer_list[i] = '/'
-
-
-def play_game():
-    play_again = input("\nWould you like to play Tic Tac Toe? (y/n): ")
-    if play_again == 'y':
-        for x in answer_list:
-            answer_list[x] = " "
-        play_tic_tac_toe()
-    else:
-        pass
+    print("\nNo winner yet. Keep playing!\n")
+    return True
 
 
 play_game()
