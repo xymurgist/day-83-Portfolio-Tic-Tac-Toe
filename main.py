@@ -77,7 +77,7 @@ def tic_tac_toe():
 
 
 def check_winner(turns):
-    """Checks the latest coordinate entered against previous entries to determine if there is a winner"""
+    """Checks the newest coordinate entered against previous entries to determine if there is a winner"""
     winners = [
         [answer_list["a1"], answer_list["a2"], answer_list["a3"]],
         [answer_list["b1"], answer_list["b2"], answer_list["b3"]],
@@ -96,11 +96,13 @@ def check_winner(turns):
         if all(i == 'O' for i in trio):
             print('\n\n!!!!! Player O is the winner !!!!!\n\n')
             return False
-        elif turns > 8:
-            print("!!!!! It's a DRAW !!!!!")
-            return False
-    print("\nNo winner yet. Keep playing!\n")
-    return True
+    
+    if turns == 9:
+        print("!!!!! It's a DRAW !!!!!")
+        return False
+    else:
+        print("\nNo winner yet. Keep playing!\n")
+        return True
 
 
 play_game()
