@@ -97,6 +97,21 @@ def check_winner(turns):
     return True
 
 
+# def winners_board():
+#     if winners[trio] == 0 or winners[trio] == 1 or winners[trio] == 2:
+#         for i in trio:
+#             answer_list[i] = '|'
+#     elif winners[trio] == 3 or winners[trio] == 4 or winners[trio] == 5:
+#         for i in trio:
+#             answer_list[i] = '-'
+#     elif winners[trio] == 6:
+#         for i in trio:
+#             answer_list[i] = '\\'
+#     elif winners[trio] == 7:
+#         for i in trio:
+#             answer_list[i] = '/'
+
+
 def play_game():
     play_again = input("\nWould you like to play Tic Tac Toe? (y/n): ")
     if play_again == 'y':
